@@ -1,0 +1,5 @@
+C:\My\Src\OneMillionIntSort\Code\bin\Debug\Code.dll
+C:\My\Src\OneMillionIntSort\Code\bin\Debug\Code.pdb
+C:\My\Src\OneMillionIntSort\Code\obj\Debug\Code.csprojResolveAssemblyReference.cache
+C:\My\Src\OneMillionIntSort\Code\obj\Debug\Code.dll
+C:\My\Src\OneMillionIntSort\Code\obj\Debug\Code.pdb

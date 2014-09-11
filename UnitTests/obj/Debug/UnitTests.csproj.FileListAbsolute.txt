@@ -1,0 +1,7 @@
+C:\My\Src\OneMillionIntSort\UnitTests\bin\Debug\UnitTests.dll
+C:\My\Src\OneMillionIntSort\UnitTests\bin\Debug\UnitTests.pdb
+C:\My\Src\OneMillionIntSort\UnitTests\bin\Debug\Code.dll
+C:\My\Src\OneMillionIntSort\UnitTests\bin\Debug\Code.pdb
+C:\My\Src\OneMillionIntSort\UnitTests\obj\Debug\UnitTests.csprojResolveAssemblyReference.cache
+C:\My\Src\OneMillionIntSort\UnitTests\obj\Debug\UnitTests.dll
+C:\My\Src\OneMillionIntSort\UnitTests\obj\Debug\UnitTests.pdb

@@ -10,13 +10,16 @@ namespace UnitTests
   public class RadixSortDemoTest
   {
     private int[] _input;
-    private string[] _inputString;
+    private string[] _inputStrings;
+    private int _numberOfDigits;
 
     [TestInitialize]
     public void Init()
     {
+      _numberOfDigits = ((long)Math.Pow(2, 32)).ToString().Length;
       _input = GenerateRandomArray(1000000);
-      _inputString = GenerateRandomStringArray(1000000);
+      _inputStrings = ConvertToStringArray();
+      
     }
 
     [TestMethod]
@@ -56,12 +59,27 @@ namespace UnitTests
                                      "fad",
                                      "fed",
                                      "fee" };
-      RadixSortDemo.LsdSort(input, 3);
+      RadixSortDemo.LsdStringSort(input, 3);
       CollectionAssert.AreEqual(input, output);
     }
 
     [TestMethod]
-    public void LstIntSortSimple()
+    public void LsdNumbersRadixSort()
+    {
+        string[] input = new string[] {"20",
+                                     "11", 
+                                     "92", 
+                                     "09"};
+        string[] output = new string[] {"09",
+                                     "11", 
+                                     "20", 
+                                     "92" };
+        RadixSortDemo.LsdStringNumberSort(input, 2);
+        CollectionAssert.AreEqual(input, output);
+    }
+
+    [TestMethod]
+    public void LsdtIntSortSimple()
     {
       int[] input = new int[] { 2, 8, 3, 1 };
       int[] output = new int[] { 1, 2, 3, 8 };
@@ -70,32 +88,33 @@ namespace UnitTests
     }
 
     [TestMethod]
-    public void LstIntSort10()
+    public void LsdtIntSortSimple2()
     {
       int[] input = GenerateRandomArray(10);      
       RadixSortDemo.LsdIntSort(input, 32);
-      //Assert.IsTrue(IsSorted(input));
+      Assert.IsTrue(IsSorted(input));
     }
 
     [TestMethod]
-    public void LstIntSortOneMillion()
+    public void LsdIntSortOneMillion()
     {     
       RadixSortDemo.LsdIntSort(_input, 32);
       Assert.IsTrue(IsSorted(_input));
     }
 
     [TestMethod]
-    public void LstIntSortOneMillionArraySort()
+    public void ArraySortOneMillion()
     {      
       Array.Sort(_input);
-      //Assert.IsTrue(IsSorted(_input));
+      Assert.IsTrue(IsSorted(_input));
     }
 
     [TestMethod]
-    public void LstIntSortOneMillionAsStrings()
-    {        
-        RadixSortDemo.LsdSort(_inputString, 10);
-        //Assert.IsTrue(IsSorted(input));
+    public void LsdtIntSortOneMillionAsStrings()
+    {   
+        RadixSortDemo.LsdStringNumberSort(_inputStrings, _numberOfDigits);
+        ConvertToIntArray(_inputStrings);
+        Assert.IsTrue(IsSorted(_input));
     }
 
     private static int[] FromCharToInt(int[] a)
@@ -115,17 +134,30 @@ namespace UnitTests
       return a;
     }
 
-    private string[] GenerateRandomStringArray(int n)
+    private string[] ConvertToStringArray()
     {
+        int n = _input.Length;
         string[] a = new string[n];
-        var r = new Random();
 
+        string mask = string.Format("{0}", new string('0', _numberOfDigits));
         for (int i = 0; i < n; i++)
-        {
-            a[i] = r.Next().ToString("{0000000000}");
+        {            
+            a[i] = _input[i].ToString(mask);
         }
         return a;
     }
+
+    private void ConvertToIntArray(string[] s)
+    {
+        int n = s.Length;        
+
+        for (int i = 0; i < n; i++)
+        {
+            _input[i] = Convert.ToInt32(s[i]);
+        }        
+    }
+
+
 
     private bool IsSorted(int[] a)
     {
@@ -140,6 +172,5 @@ namespace UnitTests
     {
       return v.CompareTo(w) < 0;
     }
-
   }
 }

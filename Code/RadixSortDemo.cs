@@ -41,9 +41,37 @@ namespace Code
         return a;
       }
 
-      public static void LsdSort(string[] a, int w)
+      public static void LsdStringSort(string[] a, int w)
       {
-        const int radix = 256;
+          int radix = 256;
+          int n = a.Length;
+          string[] aux = new string[n];
+
+          for (int d = w - 1; d >= 0; d--)
+          {
+              int[] count = new int[radix + 1];
+              for (int i = 0; i < n; i++)
+              {
+                  count[a[i][d] + 1]++;
+              }
+              for (int r = 0; r < radix; r++)
+              {
+                  count[r + 1] += count[r];
+              }
+              for (int i = 0; i < n; i++)
+              {
+                  aux[count[a[i][d]]++] = a[i];
+              }
+              for (int i = 0; i < n; i++)
+              {
+                  a[i] = aux[i];
+              }
+          }
+      }
+
+      public static void LsdStringNumberSort(string[] a, int w)
+      {
+        int radix = 10;
         int n = a.Length;
         string[] aux = new string[n];
 
@@ -52,7 +80,7 @@ namespace Code
           int[] count = new int[radix + 1];
           for (int i = 0; i < n; i++)
           {            
-            count[a[i][d] + 1]++;
+            count[CharToInt(a[i][d]) + 1]++;
           }
           for (int r = 0; r < radix; r++)
           {
@@ -60,13 +88,18 @@ namespace Code
           }
           for (int i = 0; i < n; i++)
           {            
-            aux[count[a[i][d]]++] = a[i];
+            aux[count[CharToInt(a[i][d])]++] = a[i];
           }
           for (int i = 0; i < n; i++)
           {
             a[i] = aux[i];
           }
         }
+      }
+
+      private static int CharToInt(char c)
+      {
+          return c - 48;
       }
 
       public static void LsdIntSort(int[] a, int w)
